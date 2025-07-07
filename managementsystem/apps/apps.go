@@ -30,7 +30,7 @@ type Apps struct {
 	server *Server
 
 	// driver mongo client
-	mongoClient *mongo.Client
+	mongoDB *mongo.Client
 
 	// internal log handle.
 	Logger *slog.Logger
@@ -69,13 +69,13 @@ func AppsServer(app *Apps, opts ...Option) func(c context.Context) error {
 	}
 
 	// connect driver mongoDB
-	client, err := app.ConnectDriver()
+	db, err := app.ConnectDriver()
 	if err != nil {
 		return func(c context.Context) error {
 			return err
 		}
 	}
-	app.mongoClient = client
+	app.mongoDB = db
 
 	// handler route apis
 	app.HandleFunc(e)
@@ -97,7 +97,7 @@ func (apps *Apps) HandleFunc(e *echo.Echo) {
 
 	// route management handler
 	g := e.Group("/management")
-	management.New(g, apps.mongoClient)
+	management.New(g, apps.mongoDB)
 }
 
 // ApplyApps set default value of struct.

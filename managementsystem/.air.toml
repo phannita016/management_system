@@ -2,13 +2,13 @@ root = "."
 tmp_dir = "tmp"
 
 [build]
-  cmd = "go build -o ./tmp/main.exe ./cmd"
-  bin = "./tmp/main.exe"
+  cmd = "go build -o ./tmp/main ./cmd"
+  bin = "./tmp/main"
   include_ext = ["go"]
   exclude_dir = ["tmp", "vendor"]
   delay = 500
 
 [server]
-  cmd = "./tmp/main.exe"
+  cmd = "go run ./cmd/main.go"
   delay = 500
 

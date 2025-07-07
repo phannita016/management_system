@@ -1,6 +1,9 @@
 # Use official Golang image as a base
 FROM golang:1.21-alpine
 
+# Install Air for live reload
+RUN go install github.com/cosmtrek/air@v1.42.0
+
 # Set the working directory inside the container
 WORKDIR /app
 
@@ -23,5 +26,5 @@ RUN ls -l /app
 EXPOSE 8080
 
 # Start the application
-CMD ["/app/main"]
+CMD ["air"]
 

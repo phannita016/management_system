@@ -42,6 +42,7 @@ func (m *managementEntity) Create(ctx context.Context, body dtos.ManagementReque
 		Role:       body.Role,
 		CreateDate: time.Now(),
 	}
+
 	_, err := m.collection.InsertOne(ctx, model)
 	return err
 }
